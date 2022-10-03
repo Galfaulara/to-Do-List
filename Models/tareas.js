@@ -50,7 +50,7 @@ class Tareas {
             const cadaTarea = this.listadoArr
             cadaTarea.forEach( (tarea, i)  => {
                 const idx = `${i+1}. `.green;
-                const estado = tarea.completadoEn? `${tarea.completadoEn}`.green : 'No Completado'.red; 
+                const estado = tarea.completadoEn? `Completado`.green : 'No Completado'.red; 
                 
                 console.log(`${idx} ${tarea.desc} - ${estado}\n`)
             })
@@ -62,17 +62,44 @@ class Tareas {
 
     listadoFiltrado(value = true) {
         console.log()
-        const cadaTarea = this.listadoArr.filter((tarea) => tarea.completadoEn == value)
+        const cadaTarea = this.listadoArr.filter((tarea) => tarea.completadoEn==value)
 
-            cadaTarea.forEach( (tarea, i)  => {
-                const idx = `${i+1}. `.green;
-                const estado = tarea.completadoEn? `${tarea.completadoEn}`.green : 'No Completado'.red; 
-                
-                console.log(`${idx} ${tarea.desc} - ${estado}\n`)
-            })
+        cadaTarea.forEach( (tarea, i)  => {
+            const idx = `${i+1}. `.green;
+            const estado = tarea.completadoEn? `${tarea.completadoEn}`.green : 'No Completado'.red; 
+            
+            console.log(`${idx} ${tarea.desc} - ${estado}\n`)
+            
 
-        }
+        })
 
+    }
+
+
+
+    toggleCompletadas( ids = [] ) {
+
+        ids.forEach(id => {
+            const tarea = this._listado[id];
+            if (!tarea.completadoEn){
+                tarea.completadoEn = true
+            }
+    
+        })
+
+        this.listadoArr.forEach(tarea => {
+
+            if(!ids.includes(tarea.id)){
+
+                this._listado[tarea.id].completadoEn = false;
+
+            }
+
+        })
+
+
+    
+    }
 }
 
 
